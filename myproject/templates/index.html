@@ -2,5 +2,18 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{% trans "Hello, World!" %}</h1>
+    <form method="POST" class="card p-3 mt-5">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit" class="button is-info mt-5">Submit</button>
+    </form>
+
+    <!-- Message from backend -->
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="notification has-background-info-light has-text-centered"> {{ message }}
+                <button class="delete"></button>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
