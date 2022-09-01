@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate
+from .models import Candidate, SMOKER
 from django.core.validators import RegexValidator
 
 
@@ -84,24 +84,6 @@ class CandidateForm(forms.ModelForm):
         )
     )
 
-    gender = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Gender',
-                'class': 'input'
-            }
-        )
-    )
-
-    smoker = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Smoker',
-                'class': 'select'
-            }
-        )
-    )
-
 
     experience = forms.CharField(
         widget=forms.TextInput(
@@ -125,6 +107,15 @@ class CandidateForm(forms.ModelForm):
         help_text='Write here your message!'
     )
 
+    # Method 1 (Gender)
+
+    # GENDER = [('M', 'Male'), ('F', 'Female')]
+    # gender = forms.CharField(
+    #     label='Gender',
+    #     widget=forms.RadioSelect(
+    #         choices=GENDER
+    #     )
+    # )
 
     class Meta:
         model = Candidate
@@ -138,6 +129,8 @@ class CandidateForm(forms.ModelForm):
             ('Between ($4000 and $5000)', 'Between ($4000 and $5000)'),
             ('Between ($5000 and $7000)', 'Between ($5000 and $7000)'),
         )
+
+        GENDER = [('M', 'Male'), ('F', 'Female')]
 
 
         # OUTSIDE WIDGET
@@ -163,6 +156,20 @@ class CandidateForm(forms.ModelForm):
                 attrs={
                     'class': 'input'
                 }
+            ),
+            # Method 2
+            # Gender
+            'gender': forms.RadioSelect(
+                choices=GENDER,
+                attrs={
+                    'class': 'control'
+                }
+            ),
+            # Smoker
+            'smoker': forms.RadioSelect(
+                choices=SMOKER,
+                attrs={
+                    'class': 'control'
+                }
             )
-
         }

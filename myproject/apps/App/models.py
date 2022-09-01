@@ -32,7 +32,7 @@ class Candidate(models.Model):
     salary = models.CharField(max_length=50)
     gender = models.CharField(max_length=10)
     experience = models.BooleanField(null=True)
-    smoker = models.CharField(max_length=10, choices=SMOKER, default="2")
+    smoker = models.CharField(max_length=10, choices=SMOKER, default="")
 
     email = models.EmailField(max_length=50)
     message = models.TextField()
