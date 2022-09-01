@@ -2,10 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-    <form method="POST" class="card p-5 mt-5" novalidate>
+    <div class="card p-2 m-5 has-text-centered">
+        Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; Fullstack: FU-15
+    </div>
+    <form method="POST" class="card p-5 m-5 mt-5" novalidate>
         {% csrf_token %}
         <div class="columns is-multiline">
-            <div class="column is-6">
+            <div class="column is-4">
                 {{ form.firstname.label_tag }}
                 {{ form.firstname }}
 
@@ -13,11 +16,19 @@
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>
-            <div class="column is-6">
+            <div class="column is-4">
                 {{ form.lastname.label_tag }}
                 {{ form.lastname }}
 
                 {% for error in form.lastname.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-4">
+                {{ form.job.label_tag }}
+                {{ form.job }}
+
+                {% for error in form.job.errors %}
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>

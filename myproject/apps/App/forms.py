@@ -2,6 +2,18 @@ from django import forms
 from .models import Candidate
 from django.core.validators import RegexValidator
 
+
+# Every letters to LowerCase
+class Lowercase(forms.CharField):
+    def to_python(self, value):
+        return value.lower()
+
+# Every letters to UpperCase
+class Uppercase(forms.CharField):
+    def to_python(self, value):
+        return value.upper()
+
+
 class CandidateForm(forms.ModelForm):
 
     # VALIDATIONS
@@ -29,9 +41,22 @@ class CandidateForm(forms.ModelForm):
         )
     )
 
-    email = forms.CharField(
+    # job code always in Uppercase
+    job = Uppercase(
+        label='Job code',
+        min_length=3, max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Example: FR-22',
+                'class': 'input'
+            }
+        )
+    )
+
+    # email always in Lowercase
+    email = Lowercase(
         label='Email address', min_length=8, max_length=50,
-        validators= [RegexValidator(r'^[a-zA-Z0-9.+_-]+\.[a-zA-Z]+$',
+        validators= [RegexValidator(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$',
         message="Put a valid email address !")],
         widget=forms.TextInput(
             attrs={
@@ -75,7 +100,9 @@ class CandidateForm(forms.ModelForm):
 
     class Meta:
         model = Candidate
-        fields = ['firstname', 'lastname', 'email', 'message', 'age', 'phone']
+        # fields = ['firstname', 'lastname', 'job', 'email', 'message', 'age', 'phone']
+        exclude = ['create_at', 'situation']
+
         # widgets = {
         #     'lastname': forms.TextInput(attrs={'class': 'input'}),
         #     'email': forms.TextInput(attrs={'class': 'input'}),
