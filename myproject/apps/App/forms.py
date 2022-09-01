@@ -85,13 +85,9 @@ class CandidateForm(forms.ModelForm):
     )
 
 
-    experience = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Experience',
-                'class': 'input'
-            }
-        )
+    experience = forms.BooleanField(
+        label='I have experience',
+        required= False
     )
 
 
