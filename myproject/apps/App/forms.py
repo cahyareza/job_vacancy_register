@@ -16,7 +16,7 @@ class Uppercase(forms.CharField):
 
 class CandidateForm(forms.ModelForm):
 
-    # VALIDATIONS
+    # First name
     firstname = forms.CharField(
         label='First name', min_length=3, max_length=50,
         validators= [RegexValidator(r'^[a-zA-ZA-y\s]*$',
@@ -24,11 +24,13 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'First name',
-                'class': 'input'
+                'class': 'input',
+                'style': 'font-size: 13px; text-transform: capitalize'
             }
         )
     )
 
+    # Last name
     lastname = forms.CharField(
         label='Last name', min_length=3, max_length=50,
         validators= [RegexValidator(r'^[a-zA-ZA-y\s]*$',
@@ -36,24 +38,26 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'Last name',
-                'class': 'input'
+                'class': 'input',
+                'style': 'font-size: 13px; text-transform: capitalize'
             }
         )
     )
 
-    # job code always in Uppercase
+    # job code (Uppercase function)
     job = Uppercase(
         label='Job code',
         min_length=3, max_length=50,
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'Example: FR-22',
-                'class': 'input'
+                'class': 'input',
+                'style': 'font-size: 13px; text-transform: uppercase'
             }
         )
     )
 
-    # email always in Lowercase
+    # email (lowercase function)
     email = Lowercase(
         label='Email address', min_length=8, max_length=50,
         validators= [RegexValidator(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$',
@@ -61,17 +65,16 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'Email',
-                'class': 'input'
+                'class': 'input',
+                'style': 'font-size: 13px; text-transform: lowercase'
             }
         )
     )
 
     # Method 1
-
     # age = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
 
     # Method 2
-
     age = forms.CharField(
         label='Your age', min_length=2, max_length=2,
         validators= [RegexValidator(r'^[0-9]*$',
@@ -79,32 +82,33 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'Age',
-                'class': 'input'
+                'class': 'input',
+                'style': 'font-size: 13px',
             }
         )
     )
 
-
+    # Experience
     experience = forms.BooleanField(
         label='I have experience',
         required= False
     )
 
-
+    # Message
     message = forms.CharField(
         label='About you', min_length=50, max_length=1000,
         required=True,
         widget=forms.Textarea(
             attrs={
                 'placeholder': 'Talk a little about you',
-                'class': 'textarea'
+                'class': 'textarea',
+                'style': 'font-size: 13px',
             }
         ),
         help_text='Write here your message!'
     )
 
     # Method 1 (Gender)
-
     # GENDER = [('M', 'Male'), ('F', 'Female')]
     # gender = forms.CharField(
     #     label='Gender',
@@ -117,6 +121,10 @@ class CandidateForm(forms.ModelForm):
         model = Candidate
         # fields = ['firstname', 'lastname', 'job', 'email', 'message', 'age', 'phone']
         exclude = ['create_at', 'situation']
+        # labels = {
+        #     'gender': "Your gender",
+        #     'smoker': "Do you smoke?",
+        # }
 
 
         SALARY = (
@@ -144,13 +152,15 @@ class CandidateForm(forms.ModelForm):
             'salary' : forms.Select(
                 choices=SALARY,
                 attrs={
-                    'class': 'input'
+                    'class': 'input',
+                    'style': 'font-size: 13px',
                 }
             ),
             # Personality
             'personality' : forms.Select(
                 attrs={
-                    'class': 'input'
+                    'class': 'input',
+                    'style': 'font-size: 13px',
                 }
             ),
             # Method 2
@@ -158,14 +168,16 @@ class CandidateForm(forms.ModelForm):
             'gender': forms.RadioSelect(
                 choices=GENDER,
                 attrs={
-                    'class': 'control'
+                    'class': 'control',
+                    'style': 'font-size: 13px',
                 }
             ),
             # Smoker
             'smoker': forms.RadioSelect(
                 choices=SMOKER,
                 attrs={
-                    'class': 'control'
+                    'class': 'control',
+                    'style': 'font-size: 13px',
                 }
             )
         }
@@ -186,7 +198,7 @@ class CandidateForm(forms.ModelForm):
 
 
         # ========== SELECT OPTION ========== !
-        # self.fields["personality"].choices = [('', 'Select a personality'),] + list(self.fields["personality"].choices)[1:]
+        self.fields["personality"].choices = [('', 'Select a personality'),] + list(self.fields["personality"].choices)[1:]
 
         # ========== WIDGET CONTROL ========== !
         # self.fields['phone'].widget.attrs.update({'style': 'font-size: 18px', 'placeholder': 'No phone'})

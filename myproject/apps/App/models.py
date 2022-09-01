@@ -38,10 +38,10 @@ class Candidate(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     situation = models.CharField(max_length=50, null=True, choices=SITUATION, default='Pending')
 
+    def __str__(self):
+        return self.firstname
+
     # Capitalize (F-name and L-name)
     def clean(self):
         self.firstname = self.firstname.capitalize()
         self.lastname = self.lastname.capitalize()
-
-    def __str__(self):
-        return self.firstname
