@@ -84,6 +84,34 @@ class CandidateForm(forms.ModelForm):
         )
     )
 
+    gender = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Gender',
+                'class': 'input'
+            }
+        )
+    )
+
+    smoker = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Smoker',
+                'class': 'select'
+            }
+        )
+    )
+
+
+    experience = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Experience',
+                'class': 'input'
+            }
+        )
+    )
+
 
     message = forms.CharField(
         label='About you', min_length=50, max_length=1000,
@@ -91,7 +119,7 @@ class CandidateForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'placeholder': 'Talk a little about you',
-                'class': 'input'
+                'class': 'textarea'
             }
         ),
         help_text='Write here your message!'
@@ -103,13 +131,18 @@ class CandidateForm(forms.ModelForm):
         # fields = ['firstname', 'lastname', 'job', 'email', 'message', 'age', 'phone']
         exclude = ['create_at', 'situation']
 
-        # widgets = {
-        #     'lastname': forms.TextInput(attrs={'class': 'input'}),
-        #     'email': forms.TextInput(attrs={'class': 'input'}),
-        # }
+
+        SALARY = (
+            ('', 'Salary expectation (month)'),
+            ('Between ($3000 and $4000)', 'Between ($3000 and $4000)'),
+            ('Between ($4000 and $5000)', 'Between ($4000 and $5000)'),
+            ('Between ($5000 and $7000)', 'Between ($5000 and $7000)'),
+        )
+
 
         # OUTSIDE WIDGET
         widgets = {
+            # Phone
             'phone': forms.TextInput(
                 attrs={
                     'style': 'font-size: 13px',
@@ -117,5 +150,19 @@ class CandidateForm(forms.ModelForm):
                     'data-mask': '(00) 00000-000',
                     'class': 'input'
                 }
+            ),
+             # Salary
+            'salary' : forms.Select(
+                choices=SALARY,
+                attrs={
+                    'class': 'input'
+                }
+            ),
+            # Personality
+            'personality' : forms.Select(
+                attrs={
+                    'class': 'input'
+                }
             )
+
         }
