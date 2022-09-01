@@ -35,6 +35,7 @@ class Candidate(models.Model):
 
     email = models.EmailField(max_length=50)
     message = models.TextField()
+    file = models.FileField()
     create_at = models.DateTimeField(auto_now_add=True)
     situation = models.CharField(max_length=50, null=True, choices=SITUATION, default='Pending')
 

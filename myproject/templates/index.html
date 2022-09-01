@@ -5,7 +5,7 @@
     <div class="card p-2 m-5 has-text-centered">
         Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; Fullstack: FU-15
     </div>
-    <form method="POST" class="card p-5 m-5 mt-5" novalidate>
+    <form method="POST" enctype="multipart/form-data" class="card p-5 m-5 mt-5" novalidate>
         {% csrf_token %}
         <div class="columns is-multiline">
             <div class="column is-4">
@@ -106,6 +106,14 @@
                 {{ form.message }}
 
                 {% for error in form.message.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-12">
+                {{ form.file.label_tag }}
+                {{ form.file }}
+
+                {% for error in form.file.errors %}
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>

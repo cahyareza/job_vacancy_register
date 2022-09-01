@@ -117,6 +117,16 @@ class CandidateForm(forms.ModelForm):
     #     )
     # )
 
+    # File upload
+    file = forms.FileField(
+        widget=forms.ClearableFileInput(
+            attrs={
+                'class': 'file',
+                'style': 'font-size: 13px',
+            }
+        )
+    )
+
     class Meta:
         model = Candidate
         # fields = ['firstname', 'lastname', 'job', 'email', 'message', 'age', 'phone']
