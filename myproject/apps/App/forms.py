@@ -59,6 +59,7 @@ class CandidateForm(forms.ModelForm):
         )
     )
 
+
     message = forms.CharField(
         label='About you', min_length=50, max_length=1000,
         required=True,
@@ -74,8 +75,20 @@ class CandidateForm(forms.ModelForm):
 
     class Meta:
         model = Candidate
-        fields = ['firstname', 'lastname', 'email', 'message', 'age']
+        fields = ['firstname', 'lastname', 'email', 'message', 'age', 'phone']
         # widgets = {
         #     'lastname': forms.TextInput(attrs={'class': 'input'}),
         #     'email': forms.TextInput(attrs={'class': 'input'}),
         # }
+
+        # OUTSIDE WIDGET
+        widgets = {
+            'phone': forms.TextInput(
+                attrs={
+                    'style': 'font-size: 13px',
+                    'placeholder': 'Phone',
+                    'data-mask': '(00) 00000-000',
+                    'class': 'input'
+                }
+            )
+        }

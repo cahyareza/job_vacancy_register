@@ -21,7 +21,7 @@
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>
-            <div class="column is-6">
+            <div class="column is-4">
                 {{ form.email.label_tag }}
                 {{ form.email }}
 
@@ -29,11 +29,19 @@
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>
-            <div class="column is-6">
+            <div class="column is-4">
                 {{ form.age.label_tag }}
                 {{ form.age }}
 
                 {% for error in form.age.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-4">
+                {{ form.phone.label_tag }}
+                {{ form.phone }}
+
+                {% for error in form.phone.errors %}
                     <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             </div>
