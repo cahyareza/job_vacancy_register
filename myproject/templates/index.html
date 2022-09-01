@@ -2,9 +2,50 @@
 {% load i18n %}
 
 {% block content %}
-    <form method="POST" class="card p-3 mt-5">
+    <form method="POST" class="card p-5 mt-5" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="columns is-multiline">
+            <div class="column is-6">
+                {{ form.firstname.label_tag }}
+                {{ form.firstname }}
+
+                {% for error in form.firstname.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-6">
+                {{ form.lastname.label_tag }}
+                {{ form.lastname }}
+
+                {% for error in form.lastname.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-6">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+
+                {% for error in form.email.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-6">
+                {{ form.age.label_tag }}
+                {{ form.age }}
+
+                {% for error in form.age.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="column is-12">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+
+                {% for error in form.message.errors %}
+                    <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
     <button type="submit" class="button is-info mt-5">Submit</button>
     </form>
 
