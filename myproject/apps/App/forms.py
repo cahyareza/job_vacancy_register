@@ -175,8 +175,24 @@ class CandidateForm(forms.ModelForm):
         super(CandidateForm, self).__init__(*args, **kwargs)
 
         # ========== CONTROL PANEL (Optional method to control ========== !
+        # Input required
+        # self.fields['message'].required = True
+
+        # Input Disabled
+        # self.fields['experience'].disabled = True
+
+        # Input Readonly
+        # self.fields['email'].widget.attrs.update({'readonly': 'readonly'})
+
 
         # ========== SELECT OPTION ========== !
-        self.fields["personality"].choices = [('', 'Select a personality'),] + list(self.fields["personality"].choices)[1:]
+        # self.fields["personality"].choices = [('', 'Select a personality'),] + list(self.fields["personality"].choices)[1:]
 
         # ========== WIDGET CONTROL ========== !
+        # self.fields['phone'].widget.attrs.update({'style': 'font-size: 18px', 'placeholder': 'No phone'})
+
+        # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ========== !
+        # 1) Readonly
+        # readonly = ['firstname', 'lastname', 'job']
+        # for field in readonly:
+        #     self.fields[field].widget.attrs['readonly'] = 'true'
