@@ -7,8 +7,8 @@ class CandidateAdmin(admin.ModelAdmin):
     radio_fields = {"smoker": admin.HORIZONTAL}
     # form = CandidateForm
     list_filter = ['situation']
-    list_display = ['situation', 'name','job', 'email', 'age', 'create_at', 'status', '_']
-    search_fields = ['firstname', 'lastname', 'email', 'age', 'situation']
+    list_display = ['situation', 'name','job', 'email', 'create_at', 'status', '_']
+    search_fields = ['firstname', 'lastname', 'email', 'situation']
     list_per_page = 10
 
 

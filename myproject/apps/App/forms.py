@@ -79,18 +79,18 @@ class CandidateForm(forms.ModelForm):
     # age = forms.CharField(widget=forms.TextInput(attrs={'type': 'number'}))
 
     # Method 2
-    age = forms.CharField(
-        label='Your age', min_length=2, max_length=2,
-        validators= [RegexValidator(r'^[0-9]*$',
-        message="Only numbers is allowed !")],
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Age',
-                'class': 'input',
-                'style': 'font-size: 13px',
-            }
-        )
-    )
+    # age = forms.CharField(
+    #     label='Your age', min_length=2, max_length=2,
+    #     validators= [RegexValidator(r'^[0-9]*$',
+    #     message="Only numbers is allowed !")],
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'placeholder': 'Age',
+    #             'class': 'input',
+    #             'style': 'font-size: 13px',
+    #         }
+    #     )
+    # )
 
     # Experience
     experience = forms.BooleanField(
@@ -153,6 +153,17 @@ class CandidateForm(forms.ModelForm):
 
         # OUTSIDE WIDGET
         widgets = {
+            # Birth date
+            'birth': forms.DateInput(
+                attrs={
+                    'style': 'font-size: 13px; cursor: pointer;',
+                    'type': 'date',
+                    'class': 'input',
+                    'onkeydown': 'return false', # Block typing inside field
+                    'min': '1950-01-01',
+                    'max': '2030-01-01'
+                }
+            ),
             # Phone
             'phone': forms.TextInput(
                 attrs={
