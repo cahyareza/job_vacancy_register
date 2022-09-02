@@ -224,7 +224,10 @@ class CandidateForm(forms.ModelForm):
         # readonly = ['firstname', 'lastname', 'job']
         # for field in readonly:
         #     self.fields[field].widget.attrs['readonly'] = 'true'
+
     # ================================= END SUPER FUNCTION ================================= !
+
+
 
     # FUNCTION TO PREVENT DUPLICATE ENTRIES
     # Method 1 (loop for)
