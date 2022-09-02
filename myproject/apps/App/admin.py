@@ -7,10 +7,18 @@ class CandidateAdmin(admin.ModelAdmin):
     radio_fields = {"smoker": admin.HORIZONTAL}
     # form = CandidateForm
     list_filter = ['situation']
-    list_display = ['firstname', 'lastname','job', 'email', 'age', 'create_at', 'status', '_']
+    list_display = ['situation', 'name','job', 'email', 'age', 'create_at', 'status', '_']
     search_fields = ['firstname', 'lastname', 'email', 'age', 'situation']
     list_per_page = 10
 
+
+    # function to hide f-name and l-name (when clicking over the candidate - Rows)
+    def get_fields(self, request, obj = None):
+        fields = super().get_fields(request, obj)
+        if obj:
+            fields.remove('firstname')
+            fields.remove('lastname')
+        return fields
 
     # function to change the icons
     def _(self, obj):
