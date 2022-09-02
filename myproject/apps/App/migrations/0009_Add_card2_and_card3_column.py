@@ -44,13 +44,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='candidate',
             name='finished_course',
-            field=models.DateField(default=''),
+            field=models.DateField(default='2022-05-18'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='candidate',
             name='finished_job',
-            field=models.DateField(default=''),
+            field=models.DateField(default='2022-05-18'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -73,13 +73,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='candidate',
             name='started_course',
-            field=models.DateField(default=''),
+            field=models.DateField(default='2021-05-18'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='candidate',
             name='started_jon',
-            field=models.DateField(default=''),
+            field=models.DateField(default='2021-05-18'),
             preserve_default=False,
         ),
         migrations.AddField(

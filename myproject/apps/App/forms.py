@@ -16,7 +16,6 @@ class Uppercase(forms.CharField):
 
 
 class CandidateForm(forms.ModelForm):
-
     # First name
     firstname = forms.CharField(
         label='First name', min_length=3, max_length=50,
@@ -108,9 +107,110 @@ class CandidateForm(forms.ModelForm):
                 'class': 'textarea',
                 'style': 'font-size: 13px',
             }
-        ),
-        help_text='Write here your message!'
+        )
     )
+
+    # File upload
+    file = forms.FileField(
+        label="Resume",
+        widget=forms.ClearableFileInput(
+            attrs={
+                'class': 'file',
+                'style': 'font-size: 13px',
+                # 'accept': 'application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                }
+        )
+    )
+
+    # Image (Upload photo)
+    image = forms.FileField(
+        label="Photo",
+        widget=forms.ClearableFileInput(
+            attrs={
+                'class': 'image',
+                'style': 'font-size: 13px',
+                'accept': 'image/png, image/jpeg'
+            }
+        )
+    )
+
+    # Institution
+    institution = forms.CharField(
+        label='Institution', min_length=3, max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Institution name',
+                'class': 'input',
+                'style': 'font-size: 13px;'
+            }
+        )
+    )
+
+    # College course
+    course = forms.CharField(
+        min_length=3, max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your college course',
+                'class': 'input',
+                'style': 'font-size: 13px;'
+            }
+        )
+    )
+
+    # About college course
+    about_course = forms.CharField(
+        label='About your college course', min_length=50, max_length=1000,
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Tell us about your college course...',
+                'class': 'textarea',
+                'style': 'font-size: 13px',
+            }
+        )
+    )
+
+    # About job
+    about_job = forms.CharField(
+        label='About your last job', min_length=50, max_length=1000,
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Tell us a little about what you did at the company...',
+                'class': 'textarea',
+                'style': 'font-size: 13px',
+            }
+        )
+    )
+
+    # Company (Last company)
+    company = forms.CharField(
+        label='Last company', min_length=3, max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Company name',
+                'class': 'input',
+                'style': 'font-size: 13px;'
+            }
+        )
+    )
+
+    # Position (Occupation)
+    position = forms.CharField(
+        min_length=3, max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your occupation',
+                'class': 'input',
+                'style': 'font-size: 13px;'
+            }
+        )
+    )
+
+    employed = forms.BooleanField(label="I am employed", required=False)
+    remote = forms.BooleanField(label="I agree to work remotely", required=False)
+    travel = forms.BooleanField(label="I am available for travel", required=False)
 
     # Method 1 (Gender)
     # GENDER = [('M', 'Male'), ('F', 'Female')]
@@ -120,16 +220,6 @@ class CandidateForm(forms.ModelForm):
     #         choices=GENDER
     #     )
     # )
-
-    # File upload
-    file = forms.FileField(
-        widget=forms.ClearableFileInput(
-            attrs={
-                'class': 'file',
-                'style': 'font-size: 13px',
-            }
-        )
-    )
 
     class Meta:
         model = Candidate
@@ -160,6 +250,50 @@ class CandidateForm(forms.ModelForm):
                     'type': 'date',
                     'class': 'input',
                     'onkeydown': 'return false', # Block typing inside field
+                    'min': '1950-01-01',
+                    'max': '2030-01-01'
+                }
+            ),
+            # Started course
+            'started_course': forms.DateInput(
+                attrs={
+                    'style': 'font-size: 13px; cursor: pointer;',
+                    'type': 'date',
+                    'class': 'input',
+                    'onkeydown': 'return false',  # Block typing inside field
+                    'min': '1950-01-01',
+                    'max': '2030-01-01'
+                }
+            ),
+            # Finished course
+            'finished_course': forms.DateInput(
+                attrs={
+                    'style': 'font-size: 13px; cursor: pointer;',
+                    'type': 'date',
+                    'class': 'input',
+                    'onkeydown': 'return false',  # Block typing inside field
+                    'min': '1950-01-01',
+                    'max': '2030-01-01'
+                }
+            ),
+            # Started job
+            'started_job': forms.DateInput(
+                attrs={
+                    'style': 'font-size: 13px; cursor: pointer;',
+                    'type': 'date',
+                    'class': 'input',
+                    'onkeydown': 'return false',  # Block typing inside field
+                    'min': '1950-01-01',
+                    'max': '2030-01-01'
+                }
+            ),
+            # Finished job
+            'finished_job': forms.DateInput(
+                attrs={
+                    'style': 'font-size: 13px; cursor: pointer;',
+                    'type': 'date',
+                    'class': 'input',
+                    'onkeydown': 'return false',  # Block typing inside field
                     'min': '1950-01-01',
                     'max': '2030-01-01'
                 }
@@ -204,7 +338,14 @@ class CandidateForm(forms.ModelForm):
                     'class': 'control',
                     'style': 'font-size: 13px',
                 }
-            )
+            ),
+            # Status course
+            'status_course' : forms.Select(
+                attrs={
+                    'class': 'input',
+                    'style': 'font-size: 13px',
+                }
+            ),
         }
 
     # SUPER FUNCTION
@@ -288,6 +429,6 @@ class CandidateForm(forms.ModelForm):
     # 4) PHONE (Prevent incomplete value)
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        if len(phone) != 15:
+        if len(phone) != 14:
             raise forms.ValidationError('Phone field is incomplete.')
         return phone

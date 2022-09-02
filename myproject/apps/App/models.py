@@ -1,4 +1,5 @@
 from django.db import models
+from PIL import Image
 
 SITUATION = (
     ('Pending', 'Pending'),
@@ -59,7 +60,7 @@ class Candidate(models.Model):
     #PROFESIONAL (CARD3)
     company = models.CharField(max_length=50)
     position = models.CharField(max_length=50)
-    started_jon = models.DateField(auto_now=False, auto_now_add=False)
+    started_job = models.DateField(auto_now=False, auto_now_add=False)
     finished_job = models.DateField(auto_now=False, auto_now_add=False)
     about_job = models.TextField()
     employed = models.BooleanField(null=True, verbose_name="I am employed")
