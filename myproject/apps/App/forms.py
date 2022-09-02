@@ -199,23 +199,27 @@ class CandidateForm(forms.ModelForm):
         super(CandidateForm, self).__init__(*args, **kwargs)
 
         # ========== CONTROL PANEL (Optional method to control ========== !
-        # Input required
+        # 1. Input required
         # self.fields['message'].required = True
 
-        # Input Disabled
+        # 2. Input Disabled
         # self.fields['experience'].disabled = True
 
-        # Input Readonly
+        # 3. Input Readonly
         # self.fields['email'].widget.attrs.update({'readonly': 'readonly'})
 
-
-        # ========== SELECT OPTION ========== !
+        # 4. Select option
         self.fields["personality"].choices = [('', 'Select a personality'),] + list(self.fields["personality"].choices)[1:]
 
-        # ========== WIDGET CONTROL ========== !
+        # 5. Widget (inside/outside)
         # self.fields['phone'].widget.attrs.update({'style': 'font-size: 18px', 'placeholder': 'No phone'})
 
-        # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ========== !
+        # 6. Error messages
+        self.fields['firstname'].error_messages.update({
+            'required': "Django Mastery Channel"
+        })
+
+        # ========== ADVANCE CONTROL PANEL (multiple <Inputs>) ========== !
         # 1) Readonly
         # readonly = ['firstname', 'lastname', 'job']
         # for field in readonly:
