@@ -22,6 +22,7 @@ class CandidateForm(forms.ModelForm):
         label='First name', min_length=3, max_length=50,
         validators= [RegexValidator(r'^[a-zA-ZA-y\s]*$',
         message="Only letters is allowed !")],
+        error_messages={"required": "First name field cannot be empty!"},
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'First name',
