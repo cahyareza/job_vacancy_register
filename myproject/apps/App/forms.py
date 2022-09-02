@@ -54,7 +54,8 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 'placeholder': 'Example: FR-22',
                 'class': 'input',
-                'style': 'font-size: 13px; text-transform: uppercase'
+                'style': 'font-size: 13px; text-transform: uppercase',
+                'data-mask': "AA-00",
             }
         )
     )
@@ -68,7 +69,8 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 'placeholder': 'Email',
                 'class': 'input',
-                'style': 'font-size: 13px; text-transform: lowercase'
+                'style': 'font-size: 13px; text-transform: lowercase',
+                'autocomplete': 'off'
             }
         )
     )
@@ -224,6 +226,18 @@ class CandidateForm(forms.ModelForm):
         # readonly = ['firstname', 'lastname', 'job']
         # for field in readonly:
         #     self.fields[field].widget.attrs['readonly'] = 'true'
+
+        # 2) Disable
+        # disable = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary']
+        # for dield in disable:
+        #     self.fields[field].widget.attrs['disabled'] = "true"
+
+        # 3) ERROR MESSAGES
+
+        # 4) FONT SIZE
+        font_size = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary']
+        for field in font_size:
+            self.fields[field].widget.attrs.update({'style': 'font-size: 18px'})
 
     # ================================= END SUPER FUNCTION ================================= !
 

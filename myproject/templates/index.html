@@ -4,13 +4,13 @@
 {% block content %}
 
     <!-- 1) [ALL FIELDS] Error messages from (forms.py) -->
-    {% for field in form %}
+    <!-- {% for field in form %}
         {% for error in field.errors %}
             <div class="notification has-background-danger-light has-text-centered"> {{ error|escape }}
                 <button class="delete"></button>
             </div>
         {% endfor %}
-    {% endfor %}
+    {% endfor %} -->
 
     <!-- Message from backend (success - views.py) -->
     {% for message in messages %}
