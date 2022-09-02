@@ -235,15 +235,15 @@ class CandidateForm(forms.ModelForm):
         # 3) ERROR MESSAGES
 
         # 4) FONT SIZE
-        font_size = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary']
-        for field in font_size:
-            self.fields[field].widget.attrs.update({'style': 'font-size: 18px'})
+        # font_size = ['firstname', 'lastname', 'job', 'email', 'age', 'phone', 'personality', 'salary']
+        # for field in font_size:
+        #     self.fields[field].widget.attrs.update({'style': 'font-size: 18px'})
 
     # ================================= END SUPER FUNCTION ================================= !
 
 
 
-    # FUNCTION TO PREVENT DUPLICATE ENTRIES
+    # 1) FUNCTION TO PREVENT DUPLICATE ENTRIES
     # Method 1 (loop for)
     # def clean_email(self):
     #     email = self.cleaned_data.get("email")
@@ -258,3 +258,25 @@ class CandidateForm(forms.ModelForm):
         if Candidate.objects.filter(email = email).exists():
             raise forms.ValidationError('Denied ! ' + email + ' is already registered.')
         return email
+
+    # 2) JOB CODE (Job code validation)
+    def clean_job(self):
+        job = self.cleaned_data.get('job')
+        if job == 'FR-22' or job == 'BA-10' or job == 'FU-15':
+            return job
+        else:
+            raise forms.ValidationError('Denied ! This code is invalid.')
+
+    # 3) AGE (Range: 18 - 65)
+    def clean_age(self):
+        age = self.cleaned_data.get('age')
+        if age < '18' or age > '65':
+            raise forms.ValidationError('Denied ! Age must be between 18 and 65.')
+        return age
+
+    # 4) PHONE (Prevent incomplete value)
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if len(phone) != 15:
+            raise forms.ValidationError('Phone field is incomplete.')
+        return phone
