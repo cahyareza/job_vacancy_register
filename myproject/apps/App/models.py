@@ -45,7 +45,7 @@ class Candidate(models.Model):
     smoker = models.CharField(max_length=10, choices=SMOKER, default="")
 
     email = models.EmailField(max_length=50)
-    message = models.TextField()
+    message = models.TextField(verbose_name='Presentation')
     file = models.FileField(upload_to='resume', blank=True, verbose_name='Resume')
     image = models.ImageField(upload_to='photo', blank=True, verbose_name='Photo')
     create_at = models.DateTimeField(auto_now_add=True)
