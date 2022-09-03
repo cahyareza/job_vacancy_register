@@ -3,7 +3,8 @@ from .forms import CandidateForm
 from .models import Candidate
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required # Login required to access private pages.
+from django.views.decorators.cache import cache_control # Detroy the section after log out
 
 # ------------------------- FRONTEND ------------------------!
 # Home
@@ -27,14 +28,16 @@ def register(request):
 # ------------------------- BACKEND ------------------------!
 # HR - Home page (backend)
 @login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def backend(request):
     context = {'data_read': Candidate.objects.all()}
     return render(request, "App/backend.html", context)
 
 # Access candidates (individually)
 @login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def candidate(request, id):
     data = Candidate.objects.get(pk=id)
     form = Candidate(instance = data)
     context = {'form': form}
-    return render(request, 'App/candidate.html', context)
+    return render(request, 'registration/login.html', context)

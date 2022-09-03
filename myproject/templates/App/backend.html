@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+
+<!-- Page content -->
+{% block content %}
+
+<div class="card p-5 m-5 mt-5">
+    <!--  Button  -->
+    <a href="{% url 'logout' %}" class="button is-danger has-text-left">Log out</a>
+
+    <!--  Header (title)  -->
+    <h1 class="title is-size-4 has-text-centered has-background-grey has-text-white p-2 mt-2">LIST OF CANDIDATES</h1>
+
+    <!--  Table  -->
+    <table class="table is-fullwidth">
+        <thead class="has-background-light">
+            <tr>
+                <th class="has-text-centered">Name</th>
+                <th class="has-text-centered">Email</th>
+                <th class="has-text-centered">Phone</th>
+                <th class="has-text-centered">Gender</th>
+                <th class="has-text-centered">Smoker</th>
+                <th class="has-text-centered">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--   Get data from backend   -->
+            {% for data in data_read %}
+            <tr>
+                <td class="has-text-centered">{{ data.firstname }} {{ data.lastname }}</td>
+                <td class="has-text-centered">{{ data.email }}</td>
+                <td class="has-text-centered">{{ data.phone }}</td>
+                <td class="has-text-centered">{{ data.gender }}</td>
+                <td class="has-text-centered">{{ data.smoker }}</td>
+                <td class="has-text-centered">
+                    <a href="{% url 'candidate' data.id %}" class="button">
+                        <i class="fas fa-user-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

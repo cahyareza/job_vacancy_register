@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+<!--  Page content  -->
+{% block content %}
+<div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+        <div class="card p-5 m-5 mt-5 has-text-centered">
+            <!-- Error message from backend (from forms.py) -->
+            {% if form.errors %}
+                <div class="notification has-background-danger-light has-text-centered p-2 (( message.tags }}">Enter your data correctly.
+                    <button class="delete"></button>
+                </div>
+            {% endif %}
+            <!-- Title -->
+            <h1 class="title is-size-4 has-background-black has-text-white">RESTRICTED ACCESS</h1>
+
+            <!--  Form  -->
+            <form method="POST" autocomplete="off" novalidate>
+                {% csrf_token %}
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+
+                        {% for error in form.username.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="column is-12">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+
+                        {% for error in form.password.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr>
+                <button type="submit" class="button is-info">LOG IN</button>
+                <a href="{% url 'home' %}" class="button is-light">CANCEL</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
