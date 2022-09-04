@@ -12,11 +12,11 @@ class CandidateAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     # Readonly section
-    readonly_fields = ['experience', 'gender', 'firstname', 'lastname', 'job', 'email', 'phone', 'salary',
-                       'birth', 'personality', 'smoker', 'file', 'image', 'message', 'status_course',
-                       'started_course', 'finished_course', 'course', 'institution', 'about_course',
-                       'started_job', 'finished_job', 'company', 'position', 'about_job', 'employed',
-                       'remote', 'travel']
+    # readonly_fields = ['experience', 'gender', 'firstname', 'lastname', 'job', 'email', 'phone', 'salary',
+    #                    'birth', 'personality', 'smoker', 'file', 'image', 'message', 'status_course',
+    #                    'started_course', 'finished_course', 'course', 'institution', 'about_course',
+    #                    'started_job', 'finished_job', 'company', 'position', 'about_job', 'employed',
+    #                    'remote', 'travel']
 
     # Fieldset
     fieldsets = [

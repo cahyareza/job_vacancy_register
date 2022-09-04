@@ -375,6 +375,25 @@ class CandidateForm(forms.ModelForm):
             'required': "Django Mastery Channel"
         })
 
+        # 7. Disable all input (By: ID/PK)
+        # A) Method 1
+        # instance = getattr(self, 'instance', None)
+        # if instance and instance.pk:
+        #     self.fields['firstname'].disabled = True
+
+        # B) Method 2
+        instance = getattr(self, 'instance', None)
+        array = ['firstname', 'lastname', 'job', 'email', 'phone', 'salary',
+                 'birth', 'personality', 'smoker', 'file', 'image', 'message', 'status_course',
+                 'started_course', 'finished_course', 'course', 'institution', 'about_course',
+                 'started_job', 'finished_job', 'company', 'position', 'about_job', 'employed',
+                 'remote', 'travel']
+        for field in array:
+            if instance and instance.pk:
+                self.fields[field].disabled = True
+                self.fields['file'].widget.attrs.update({'style': 'display: none'})
+                self.fields['image'].widget.attrs.update({'style': 'display: none'})
+
         # ========== ADVANCE CONTROL PANEL (multiple <Inputs>) ========== !
         # 1) Readonly
         # readonly = ['firstname', 'lastname', 'job']
