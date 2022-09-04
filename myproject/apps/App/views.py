@@ -38,6 +38,6 @@ def backend(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def candidate(request, id):
     data = Candidate.objects.get(pk=id)
-    form = Candidate(instance = data)
+    form = CandidateForm(instance = data)
     context = {'form': form}
-    return render(request, 'registration/login.html', context)
+    return render(request, 'App/candidate.html', context)

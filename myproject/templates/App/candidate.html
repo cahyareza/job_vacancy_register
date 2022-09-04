@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'register.html' %}
 
-</body>
-</html>
+<!--  Buttons denied here -->
+{% block buttons %}
+<a href="{% url 'backend' %}" class="button is-dark p-2 ml-5 mt-1">Back</a>
+{% endblock buttons %}
