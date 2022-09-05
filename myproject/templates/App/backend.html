@@ -37,6 +37,8 @@
                         <i class="fas fa-user-alt"></i>
                     </a>
                 </td>
+                {% empty %}
+                <td class="has-text-danger has-text-centered">No records found</td>
             </tr>
             {% endfor %}
         </tbody>
